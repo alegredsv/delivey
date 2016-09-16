@@ -1,8 +1,9 @@
 @extends('app')
 
 @section('content')
+
 <div class="container">
-    <h3>Nova categoria</h3>
+    <h3>Editando categoria</h3>
     @if($errors->any())
         <ul class="alert">
             @foreach($errors->all() as $erro)
