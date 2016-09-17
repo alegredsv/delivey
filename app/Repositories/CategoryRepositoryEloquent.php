@@ -15,6 +15,15 @@ use CodeDelivery\Validators\CategoryValidator;
 class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepository
 {
     /**
+     *
+     */
+    public function listsCategory(){
+
+        return $this->model->lists('name','id');
+    }
+
+
+    /**
      * Specify Model class name
      *
      * @return string
@@ -24,7 +33,6 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
         return Category::class;
     }
 
-    
 
     /**
      * Boot up the repository, pushing criteria
@@ -33,4 +41,6 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
 }
+
