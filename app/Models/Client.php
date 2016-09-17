@@ -2,6 +2,7 @@
 
 namespace CodeDelivery\Models;
 
+use CodeDelivery\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
@@ -20,7 +21,7 @@ class Client extends Model implements Transformable
     ];
 
     public function user(){
-        return $this->hasOne(\CodeDelivery\Models\User::class);
+        return $this->hasOne(User::class,'id','user_id');
     }
 
 }
