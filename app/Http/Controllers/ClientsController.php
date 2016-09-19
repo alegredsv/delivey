@@ -8,6 +8,7 @@ use CodeDelivery\Repositories\CategoryRepository;
 use CodeDelivery\Repositories\ClientRepository;
 use CodeDelivery\Repositories\ProductRepository;
 use CodeDelivery\Repositories\UserRepository;
+use CodeDelivery\Services\ClientService;
 use Illuminate\Http\Request;
 
 use CodeDelivery\Http\Requests;
@@ -21,17 +22,22 @@ class ClientsController extends Controller
      * @var UserRepository
      */
     private $userRepository;
+    /**
+     * @var ClientService
+     */
+    private $clientService;
 
     /**
      * @var CategoryRepository
      */
 
 
-    public function __construct(ClientRepository $repository, UserRepository $userRepository)
+    public function __construct(ClientRepository $repository, UserRepository $userRepository, ClientService $clientService)
     {
         $this->repository = $repository;
 
         $this->userRepository = $userRepository;
+        $this->clientService = $clientService;
     }
 
     public function index(){
@@ -48,7 +54,7 @@ class ClientsController extends Controller
 
     public function store(AdminClientRequest $request){
         $data = $request->all();
-        $this->repository->create($data);
+        $this->clientService->create($data);
         return redirect()->route('admin.clients.index');
     }
 
@@ -67,7 +73,7 @@ class ClientsController extends Controller
     public function update(AdminClientRequest $request, $id)
     {
         $data = $request->all();
-        $this->repository->update($data,$id);
+        $this->clientService->update($data,$id);
         return redirect()->route('admin.clients.index');
     }
 
