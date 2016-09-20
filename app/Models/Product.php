@@ -2,6 +2,7 @@
 
 namespace CodeDelivery\Models;
 
+use CodeDelivery\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
@@ -18,7 +19,7 @@ class Product extends Model implements Transformable
     ];
 
     public function category(){
-        return  $this->belongsTo(\CodeDelivery\Models\Category::class);
+        return  $this->belongsTo(Category::class);
     }
 
 }

@@ -2,6 +2,8 @@
 
 namespace CodeDelivery\Models;
 
+use CodeDelivery\Models\OrderItem;
+use CodeDelivery\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
@@ -17,12 +19,15 @@ class Order extends Model implements Transformable
         'status'
     ];
 
-    public function items(){
-        return $this->hasMany(\CodeDelivery\Models\OrderItem::class);
+    public function client(){
+        return $this->belongsTo(Client::class);
+    }
+    public function item(){
+        return $this->hasMany(OrderItem::class);
     }
 
     public function deliveryman(){
-        return $this->belongsTo(\CodeDelivery\Models\User::class);
+        return $this->belongsTo(User::class,'user_deliveryman_id','id');
     }
 
 }
