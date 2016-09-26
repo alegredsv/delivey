@@ -38,6 +38,7 @@
 					<li><a href="{{ route('admin.products.index') }}">Produtos</a></li>
 					<li><a href="{{ route('admin.clients.index') }}">Clientes</a></li>
 					<li><a href="{{ route('admin.orders.index') }}">Pedidos</a></li>
+					<li><a href="{{ route('admin.cupoms.index') }}">Cupons</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -66,5 +67,7 @@
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	@yield('post_script')
 </body>
 </html>
