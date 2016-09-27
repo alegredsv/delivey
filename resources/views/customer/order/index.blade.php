@@ -22,9 +22,9 @@
                     <td>{{$order->status}}</td>
 
                     <td>
-                        <a href="{{route('customer.order.edit',['id'=>$order->id])}}" class="btn btn-default btn-sm">
+                       {{-- <a href="{{route('customer.order.edit',['id'=>$order->id])}}" class="btn btn-default btn-sm">
                             Editar
-                        </a>
+                        </a>--}}
                     </td>
                 </tr>
             @endforeach

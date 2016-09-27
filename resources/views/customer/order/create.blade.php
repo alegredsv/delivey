@@ -9,12 +9,12 @@
 
             <div class="container">
 
-                {!! Form::open(['class'=>'form']) !!}
+                {!! Form::open(['route' => 'customer.order.store'],['class'=>'form']) !!}
         <div class="form-group">
             <label>Total: </label>
             <p id="total"></p>
             <a href="#" id="btnNewItem" class="btn btn-default">Novo item</a>
-
+            <br><br>
 
             <table class="table table-bordered">
                 <thead>
