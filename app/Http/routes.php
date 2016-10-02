@@ -11,6 +11,8 @@
 |
 */
 
+use LucaDegasperi\OAuth2Server\Facades\Authorizer;
+
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -58,4 +60,19 @@ Route::group(['prefix'=>'customer', 'as' => 'customer.'],function (){
 Route::get('test', function (){
    $repository = app()->make('CodeDelivery\Repositories\CategoryRepository');
    return $repository->all();
+});
+
+Route::post('oauth/access_token', function() {
+    return Response::json(Authorizer::issueAccessToken());
+});
+
+Route::group(['prefix' => 'api','middleware'=>'oauth', 'as'=>'api.'],function (){
+
+    Route::get('pedidos',function (){
+       return ['id' => 1,
+        'client' => 'Bora',
+        'total' => 10];
+    });
+
+
 });
