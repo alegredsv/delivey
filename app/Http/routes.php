@@ -68,11 +68,43 @@ Route::post('oauth/access_token', function() {
 
 Route::group(['prefix' => 'api','middleware'=>'oauth', 'as'=>'api.'],function (){
 
-    Route::get('pedidos',function (){
-       return ['id' => 1,
-        'client' => 'Bora',
-        'total' => 10];
+    Route::group(['prefix' => 'client','middleware'=>'oauth.checkrole:client', 'as'=>'client.'],function () {
+
+        Route::get('order', function (){
+            return ['pegando dados'];
+        });
+        Route::post('order', function (){
+            return ['criando dados'];
+        });
+        Route::put('order', function (){
+            return ['atualizando dados inteiros'];
+        });
+        Route::patch('order', function (){
+            return ['atualizando dados parcial'];
+        });
+        Route::delete('order', function (){
+            return ['excluindo dados'];
+        });
+
+
+
+
+        Route::get('pedidos',function (){
+            return ['id' => 1,
+                'client' => 'Bora Cliente',
+                'total' => 10];
+        });
     });
+
+    Route::group(['prefix' => 'deliveryman','middleware'=>'oauth.checkrole:deliveryman', 'as'=>'deliveryman.'],function () {
+        Route::get('pedidos',function (){
+            return ['id' => 1,
+                'client' => 'Bora Entregador',
+                'total' => 10];
+        });
+    });
+
+
 
 
 });
