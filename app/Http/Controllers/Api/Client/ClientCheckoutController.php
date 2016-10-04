@@ -20,10 +20,7 @@ class ClientCheckoutController extends Controller
      * @var UserRepository
      */
     private $userRepository;
-    /**
-     * @var ProductRepository
-     */
-    private $productRepository;
+
     /**
      * @var OrderService
      */
@@ -35,7 +32,6 @@ class ClientCheckoutController extends Controller
     {
         $this->repository = $repository;
         $this->userRepository = $userRepository;
-        $this->productRepository = $productRepository;
         $this->orderService = $orderService;
     }
 
