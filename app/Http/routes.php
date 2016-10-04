@@ -16,7 +16,7 @@ use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 Route::get('/', function () {
     return view('auth.login');
 });
-Route::group(['prefix' => 'admin','middleware'=>'auth.checkrole', 'as'=>'admin.'],function (){
+Route::group(['prefix' => 'admin','middleware'=>'auth.checkrole:admin', 'as'=>'admin.'],function (){
 
 
     Route::get('categories',['as'=>'categories.index','uses'=>'CategoriesController@index']);
@@ -51,7 +51,7 @@ Route::group(['prefix' => 'admin','middleware'=>'auth.checkrole', 'as'=>'admin.'
     Route::get('cupoms/create',['as'=>'cupoms.create','uses'=>'CupomsController@create']);
 });
 
-Route::group(['prefix'=>'customer', 'as' => 'customer.'],function (){
+Route::group(['prefix'=>'customer','middleware'=>'auth.checkrole:client', 'as' => 'customer.'],function (){
     Route::get('order',['as' => 'order.index', 'uses' => 'CheckoutController@index']);
     Route::get('order/create',['as' => 'order.create', 'uses' => 'CheckoutController@create']);
     Route::post('order/store',['as' => 'order.store', 'uses' => 'CheckoutController@store']);
