@@ -11,6 +11,7 @@ namespace CodeDelivery\Services;
 
 use CodeDelivery\Repositories\ClientRepository;
 use CodeDelivery\Repositories\UserRepository;
+use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class ClientService
 {
@@ -46,6 +47,10 @@ class ClientService
         $data['user_id'] = $userId->id;
      
         $this->clientRepository->create($data);
+    }
+
+    public function getAuthenticatedUser(){
+       return  $this->userRepository->skipPresenter(false)->find(Authorizer::getResourceOwnerID());
     }
 
 

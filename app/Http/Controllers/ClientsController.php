@@ -81,4 +81,9 @@ class ClientsController extends Controller
         $this->repository->delete($id);
         return redirect()->route('admin.clients.index');
     }
+
+    public function authenticated(){
+        $user =  $this->clientService->getAuthenticatedUser();
+        return $user;
+    }
 }
