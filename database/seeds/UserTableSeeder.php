@@ -32,7 +32,7 @@ class UserTableSeeder extends Seeder
 
 
         factory(User::class,3)->create(
-            ['role' => 'deliveryman']
+            ['role' => 'deliveryman','password' => bcrypt(123456)]
         );
 
     }
