@@ -52,7 +52,7 @@ class OrderService
                 $cupom->save();
                 unset($data['cupom_code']);
             }
-
+            
             $items = $data['items'];
             unset($data['items']);
             $order = $this->orderRepository->create($data);

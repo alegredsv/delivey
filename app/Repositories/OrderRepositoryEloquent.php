@@ -3,6 +3,7 @@
 namespace CodeDelivery\Repositories;
 
 
+use CodeDelivery\Presenters\OrderPresenter;
 use Illuminate\Database\Eloquent\Collection;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -16,7 +17,7 @@ use CodeDelivery\Models\Order;
  */
 class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
 {
-
+    protected $skipPresenter = true;
     public function getByIdAndDeliveryman($id,$idDeliverymen){
 
         $result = $this->with(['client','item','cupom'])->findWhere([
@@ -52,5 +53,13 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    /**
+     * @return Application
+     */
+    public function presenter()
+    {
+        return OrderPresenter::class;
     }
 }
