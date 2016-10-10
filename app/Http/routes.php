@@ -57,10 +57,7 @@ Route::group(['prefix'=>'customer','middleware'=>'auth.checkrole:client', 'as' =
     Route::post('order/store',['as' => 'order.store', 'uses' => 'CheckoutController@store']);
 });
 
-Route::get('test', function (){
-   $repository = app()->make('CodeDelivery\Repositories\CategoryRepository');
-   return $repository->all();
-});
+
 
 Route::post('oauth/access_token', function() {
     return Response::json(Authorizer::issueAccessToken());
