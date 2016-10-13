@@ -30,74 +30,12 @@
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
+    <script src="js/controllers/home.js"></script>
     <script src="js/app.js"></script>
   </head>
   <body ng-app="starter">
-
-    <ion-pane>
-      <ion-header-bar class="bar-stable bar-calm">
-
-        <a href="javascript:void(0);" class="button button-energized button-clear icon ion-arrow-left-a"></a>
-        <a href="javascript:void(0);" class="button button-energized button-clear  icon ion-arrow-graph-down-right"></a>
-        <h1 class="title">Ionic Blank Starter</h1>
-      </ion-header-bar>
-
-      <ion-header-bar class="bar-subheader bar-assertive">
-        <h1 class="title">Ionic Blank Starter</h1>
-      </ion-header-bar>s
-
-      <ion-content class="padding has-subheader">
-        <ion-list show-delete="true">
-          <ion-item>
-            <ion-delete-button class="ion-minus-circled"></ion-delete-button>
-            Hello, Meu item 1!
-          </ion-item>
-          <ion-item class="icon ion-social-android">
-            Hello, Meu item 2!
-          </ion-item>
-        </ion-list>
-           <p>Lorem ipsum dolor sit amet,
-             consectetur adipisicing elit. Autem culpa dicta doloremque, explicabo fugit id, itaque magni
-             minima minus nam necessitatibus nulla, officiis similique? Consectetur deleniti dicta fuga praesentium
-             similique?</p>
-        <a href="javascript:void(0);" class="button button-energized ion-android-cloud-done icon-left">Primeiro botão</a>
-        <button class="button button-positive ion-android-archive">
-          button-positive
-        </button>
-        <button class="button button-dark button-large">
-          button-dark
-        </button>
-        <button class="button button-calm button-small">
-          button-dark
-        </button>
-        <button class="button button-block button-positive button-outline">
-          Block Button
-        </button><br>
-        <button class="button button-positive button-outline">
-         <i class="ion-asterisk"></i> Block Button
-        </button>
-        <button class="button button-calm button-outline">
-          <i class="ion-asterisk"></i> Block Button
-        </button>
-
-
-
-      </ion-content>
-      <ion-tabs class="tabs-dark  tabs-icon-top">
-
-        <ion-tab title="Home" icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline">
-          <!-- Tab 1 content -->
-        </ion-tab>
-
-        <ion-tab title="About" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
-          <!-- Tab 2 content -->
-        </ion-tab>
-
-        <ion-tab title="Settings" icon-on="ion-ios-gear" icon-off="ion-ios-gear-outline">
-          <!-- Tab 3 content -->
-        </ion-tab>
-
-      </ion-tabs>
-    </ion-pane>
+    <ion-nav-bar class="bar bar-royal"></ion-nav-bar>
+    <ion-nav-view>
+    </ion-nav-view>
   </body>
 </html>
