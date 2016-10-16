@@ -150,6 +150,7 @@ return [
         CodeDelivery\Providers\EventServiceProvider::class,
         CodeDelivery\Providers\RouteServiceProvider::class,
         CodeDelivery\Providers\RepositoryServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
 
     ],
 
