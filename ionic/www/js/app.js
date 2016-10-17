@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 
 
-angular.module('starter', ['ionic','starter.controllers','angular-oauth2'])
+angular.module('starter', ['ionic','starter.controllers','starter.controllers2','angular-oauth2'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

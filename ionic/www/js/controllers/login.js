@@ -11,7 +11,6 @@ angular.module('starter.controllers',[])
             OAuth.getAccessToken($scope.user).then(function(data){
                 $state.go('home');
             }, function (responseError) {
-                console.log('login erro');
                 $ionicPopup.alert({
                     title:'Advertência',
                     template:'Login e/ou senha inválidos'
