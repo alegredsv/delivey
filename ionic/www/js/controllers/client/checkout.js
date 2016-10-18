@@ -2,19 +2,7 @@
  * Created by joeramone on 17/10/2016.
  */
 angular.module('starter.controllers')
-    .controller('ClientCheckoutCtlr', ['$scope','OAuth','$ionicPopup','$state', function ($scope, OAuth, $ionicPopup, $state) {
-        // $scope.user = {
-        //     username:'',
-        //     password:''
-        // }
-        // $scope.login = function () {
-        //     OAuth.getAccessToken($scope.user).then(function(data){
-        //         $state.go('home');
-        //     }, function (responseError) {
-        //         $ionicPopup.alert({
-        //             title:'Advertência',
-        //             template:'Login e/ou senha inválidos'
-        //         })
-        //     })
-        // }
+    .controller('ClientCheckoutCtlr', ['$scope','$state','cart', function ($scope, $state, cart) {
+        $scope.items = cart.items;
+console.log(window.localStorage['cart']);
     }]);

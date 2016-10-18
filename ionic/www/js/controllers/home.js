@@ -3,7 +3,7 @@
  * Created by joeramone on 12/10/2016.
  */
 angular.module('starter.controllers')
-    .controller('HomeCtlr', ['$scope','$http','$cookies',function ($scope,$http,$cookies) {
+    .controller('HomeCtlr', ['$scope','$http','$cookies', 'appConfig',function ($scope,$http,$cookies,appConfig) {
 
 
 
@@ -14,7 +14,7 @@ angular.module('starter.controllers')
                 params: parameters
             };
 
-            $http.get('http://delivery.app/api/authenticated', config)
+            $http.get(appConfig.baseUrl+'/api/authenticated', config)
                 .success(function (data, status, headers, config) {
                    
                     $scope.username =data.data.name;

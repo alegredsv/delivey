@@ -5,9 +5,10 @@
 // the 2nd parameter is an array of 'requires'
 
 angular.module('starter.controllers',[]);
-angular.module('starter', ['ionic','starter.controllers','angular-oauth2','ngResource'])
+angular.module('starter.services',[]);
+angular.module('starter', ['ionic','starter.controllers','starter.services','angular-oauth2','ngResource'])
     .constant('appConfig',{
-        baseUrl:'http://delivery.app'
+        baseUrl:'http://homestead.app:8000'
     })
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -30,7 +31,7 @@ angular.module('starter', ['ionic','starter.controllers','angular-oauth2','ngRes
    
     OAuthProvider.configure({
         baseUrl: appConfig.baseUrl,
-        clientId: 'appid02',
+        clientId: 'apiid01',
         clientSecret: 'secret', // optional
         grantPath: '/oauth/access_token'
     });
@@ -55,7 +56,7 @@ angular.module('starter', ['ionic','starter.controllers','angular-oauth2','ngRes
       .state('client',{
           abstract:true,
           url:'/client',
-          template:'<ui-view/>',
+          template:'<ion-nav-view/>',
       })
       //area de pedidos
       .state('client.checkout',{
@@ -97,4 +98,8 @@ angular.module('starter', ['ionic','starter.controllers','angular-oauth2','ngRes
      //    })
 
 
-});
+})
+    .service('cart', function () {
+        this.items = [];
+    })
+;
