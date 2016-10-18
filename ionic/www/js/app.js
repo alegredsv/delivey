@@ -4,9 +4,11 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
-
-angular.module('starter', ['ionic','starter.controllers','starter.controllers2','angular-oauth2'])
-
+angular.module('starter.controllers',[]);
+angular.module('starter', ['ionic','starter.controllers','angular-oauth2','ngResource'])
+    .constant('appConfig',{
+        baseUrl:'http://delivery.app'
+    })
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -24,10 +26,10 @@ angular.module('starter', ['ionic','starter.controllers','starter.controllers2',
     }
   });
 })
-.config(function ($stateProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider) {
+.config(function ($stateProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider,appConfig) {
    
     OAuthProvider.configure({
-        baseUrl: 'http://delivery.app',
+        baseUrl: appConfig.baseUrl,
         clientId: 'appid02',
         clientSecret: 'secret', // optional
         grantPath: '/oauth/access_token'
@@ -38,7 +40,7 @@ angular.module('starter', ['ionic','starter.controllers','starter.controllers2',
             secure: false
         }
     });
-//  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/login');
   $stateProvider
          .state('login',{
          url:'/login',
@@ -50,6 +52,29 @@ angular.module('starter', ['ionic','starter.controllers','starter.controllers2',
       templateUrl:'/templates/home.html',
        controller:'HomeCtlr'
      })
+      .state('client',{
+          abstract:true,
+          url:'/client',
+          template:'<ui-view/>',
+      })
+      //area de pedidos
+      .state('client.checkout',{
+            url: '/checkout',
+            templateUrl:'/templates/client/checkout.html',
+             controller:'ClientCheckoutCtlr'
+        })
+        //detalhes dos itens
+      .state('client.checkout_item_detail',{
+          url: '/checkout/detail/:index',
+          templateUrl:'/templates/client/checkout-detail.html',
+          controller:'ClientCheckoutDetailCtlr'
+      })
+        //listagem de produtos
+      .state('client.view_products',{
+          url: '/view_products',
+          templateUrl:'/templates/client/view-products.html',
+          controller:'ClientViewProductCtlr'
+      })
      //    .state('home.a',{
      //      url:'/a',
      //      templateUrl:'/templates/home-a.html'

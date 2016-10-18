@@ -2,7 +2,7 @@
 /**
  * Created by joeramone on 12/10/2016.
  */
-angular.module('starter.controllers2',[])
+angular.module('starter.controllers')
     .controller('HomeCtlr', ['$scope','$http','$cookies',function ($scope,$http,$cookies) {
 
 
@@ -16,15 +16,12 @@ angular.module('starter.controllers2',[])
 
             $http.get('http://delivery.app/api/authenticated', config)
                 .success(function (data, status, headers, config) {
-                    console.log('sucesso');
-                    $scope.username =data.name;
+                   
+                    $scope.username =data.data.name;
                 })
                 .error(function (data, status, header, config) {
                     console.log('erro');
-                    // $scope.ResponseDetails = "Data: " + data +
-                    //     "<hr />status: " + status +
-                    //     "<hr />headers: " + header +
-                    //     "<hr />config: " + config;
+
                 });
 
 

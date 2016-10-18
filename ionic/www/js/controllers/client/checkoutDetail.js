@@ -1,8 +1,10 @@
 /**
- * Created by joeramone on 12/10/2016.
+ * Created by joeramone on 17/10/2016.
  */
+
+
 angular.module('starter.controllers')
-    .controller('LoginCtlr', ['$scope','OAuth','$ionicPopup','$state', function ($scope, OAuth, $ionicPopup, $state) {
+    .controller('ClientCheckoutDetailCtlr', ['$scope','OAuth','$ionicPopup','$state', function ($scope, OAuth, $ionicPopup, $state) {
         $scope.user = {
             username:'',
             password:''
@@ -17,4 +19,4 @@ angular.module('starter.controllers')
                 })
             })
         }
-}]);
+    }]);
