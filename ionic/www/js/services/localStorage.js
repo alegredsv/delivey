@@ -18,6 +18,10 @@ angular.module('starter.services')
             return this.getObject(key);
         },
         getObject:function (key) {
+
+            if($window.localStorage[key] == 'undefined'){
+                return false;
+            }
             return JSON.parse($window.localStorage[key] || null);
         }
     }

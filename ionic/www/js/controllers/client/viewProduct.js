@@ -2,11 +2,9 @@
  * Created by joeramone on 17/10/2016.
  */
 angular.module('starter.controllers')
-    .controller('ClientViewProductCtlr', ['$scope','$state','Product','$ionicLoading','cart','$localStorage', function ($scope, $state, Product, $ionicLoading, cart,$localStorage) {
-        $localStorage.setObject('cart',{
-            name:'Ionic',
-            version: '1.0.0'
-        });
+    .controller('ClientViewProductCtlr', ['$scope','$state','Product','$ionicLoading','$cart',
+        function ($scope, $state, Product, $ionicLoading, $cart) {
+
         $scope.products = [];
         $ionicLoading.show({
             template: 'Carregando...'
@@ -20,7 +18,10 @@ angular.module('starter.controllers')
         });
 
         $scope.addItem = function (item) {
-            cart.items.push(item);
+            // cart.items.push(item);
+            // $state.go('client.checkout');
+            item.qtd = 1;
+            $cart.addItem(item);
             $state.go('client.checkout');
         };
     }]);

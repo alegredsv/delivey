@@ -8,7 +8,7 @@ angular.module('starter.controllers',[]);
 angular.module('starter.services',[]);
 angular.module('starter', ['ionic','starter.controllers','starter.services','angular-oauth2','ngResource'])
     .constant('appConfig',{
-        baseUrl:'http://homestead.app:8000'
+        baseUrl:'http://delivery.app'
     })
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -31,7 +31,7 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
    
     OAuthProvider.configure({
         baseUrl: appConfig.baseUrl,
-        clientId: 'apiid01',
+        clientId: 'appid02',
         clientSecret: 'secret', // optional
         grantPath: '/oauth/access_token'
     });
