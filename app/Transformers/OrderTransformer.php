@@ -24,6 +24,8 @@ class OrderTransformer extends TransformerAbstract
     {
         return [
             'id'         => (int) $model->id,
+            'total'      =>  $model->total,
+
 
             /* place your other model properties here */
 

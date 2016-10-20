@@ -8,7 +8,9 @@ angular.module('starter.controllers',[]);
 angular.module('starter.services',[]);
 angular.module('starter', ['ionic','starter.controllers','starter.services','angular-oauth2','ngResource'])
     .constant('appConfig',{
-        baseUrl:'http://delivery.app'
+      //  baseUrl:'http://delivery.app'
+        baseUrl:'http://homestead.app:8000'
+
     })
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -31,7 +33,8 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
    
     OAuthProvider.configure({
         baseUrl: appConfig.baseUrl,
-        clientId: 'appid02',
+       // clientId: 'appid02',
+        clientId: 'apiid01',
         clientSecret: 'secret', // optional
         grantPath: '/oauth/access_token'
     });
@@ -62,13 +65,20 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
       .state('client.checkout',{
             url: '/checkout',
             templateUrl:'/templates/client/checkout.html',
-             controller:'ClientCheckoutCtlr'
+             controller:'ClientCheckoutCtlr',
+             cache: false
         })
         //detalhes dos itens
       .state('client.checkout_item_detail',{
           url: '/checkout/detail/:index',
           templateUrl:'/templates/client/checkout-detail.html',
           controller:'ClientCheckoutDetailCtlr'
+      })
+
+      .state('client.checkout_successful',{
+          url: '/checkout/successful',
+          templateUrl:'/templates/client/successful.html',
+          controller:'ClientCheckoutSuccessfulCtlr'
       })
         //listagem de produtos
       .state('client.view_products',{
