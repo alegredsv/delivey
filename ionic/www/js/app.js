@@ -9,7 +9,9 @@ angular.module('starter.services',[]);
 angular.module('starter', ['ionic','starter.controllers','starter.services','angular-oauth2','ngResource'])
     .constant('appConfig',{
       //  baseUrl:'http://delivery.app'
-        baseUrl:'http://homestead.app:8000'
+        baseUrl:'http://192.168.10.10'
+
+     //   baseUrl:'http://homestead.app:8000'
 
     })
 .run(function($ionicPlatform) {
@@ -33,8 +35,8 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
    
     OAuthProvider.configure({
         baseUrl: appConfig.baseUrl,
-       // clientId: 'appid02',
-        clientId: 'apiid01',
+        clientId: 'appid02',
+       //clientId: 'apiid01',
         clientSecret: 'secret', // optional
         grantPath: '/oauth/access_token'
     });
@@ -44,16 +46,16 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
             secure: false
         }
     });
-  $urlRouterProvider.otherwise('/login');
+
   $stateProvider
          .state('login',{
          url:'/login',
-         templateUrl:'/templates/login.html',
+         templateUrl:'templates/login.html',
           controller:'LoginCtlr'
         })
       .state('home',{
       url:'/home',
-      templateUrl:'/templates/home.html',
+      templateUrl:'templates/home.html',
        controller:'HomeCtlr'
      })
       .state('client',{
@@ -64,28 +66,31 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
       //area de pedidos
       .state('client.checkout',{
             url: '/checkout',
-            templateUrl:'/templates/client/checkout.html',
+            templateUrl:'templates/client/checkout.html',
              controller:'ClientCheckoutCtlr',
              cache: false
         })
         //detalhes dos itens
       .state('client.checkout_item_detail',{
           url: '/checkout/detail/:index',
-          templateUrl:'/templates/client/checkout-detail.html',
+          templateUrl:'templates/client/checkout-detail.html',
           controller:'ClientCheckoutDetailCtlr'
       })
 
       .state('client.checkout_successful',{
           url: '/checkout/successful',
-          templateUrl:'/templates/client/successful.html',
-          controller:'ClientCheckoutSuccessfulCtlr'
+          templateUrl:'templates/client/successful.html',
+          controller:'ClientCheckoutSuccessfulCtlr',
+          cache: false
       })
         //listagem de produtos
       .state('client.view_products',{
           url: '/view_products',
-          templateUrl:'/templates/client/view-products.html',
+          templateUrl:'templates/client/view-products.html',
           controller:'ClientViewProductCtlr'
       })
+
+    $urlRouterProvider.otherwise('/login');
      //    .state('home.a',{
      //      url:'/a',
      //      templateUrl:'/templates/home-a.html'
