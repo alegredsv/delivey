@@ -8,11 +8,11 @@ angular.module('starter.controllers',[]);
 angular.module('starter.services',[]);
 angular.module('starter', ['ionic','starter.controllers','starter.services','angular-oauth2','ngResource','ngCordova'])
     .constant('appConfig',{
-      //  baseUrl:'http://delivery.app'
-       // baseUrl:'http://192.168.10.10',
-        baseUrl:'http://192.168.1.6:8000'
-
-     //   baseUrl:'http://homestead.app:8000'
+      // casa baseUrl:'http://delivery.app'
+       // casa baseUrl:'http://192.168.10.10',
+       // casa baseUrl:'http://192.168.1.6:8000'
+         baseUrl:'http://54.244.77.187/delivey' //amazon
+     // serviço  baseUrl:'http://homestead.app:8000'
 
     })
 .run(function($ionicPlatform) {
@@ -32,7 +32,7 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
     }
   });
 })
-.config(function ($stateProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider,appConfig) {
+.config(function ($stateProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider,appConfig, $provide) {
    
     OAuthProvider.configure({
         baseUrl: appConfig.baseUrl,
@@ -92,6 +92,37 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
       })
 
     $urlRouterProvider.otherwise('/login');
+
+
+    $provide.decorator('OAuthToken',['$localStorage','$delegate', function ($localStorage,$delegate) {
+        Object.defineProperties($delegate,{
+            setToken:{
+                value : function (data) {
+                   return $localStorage.setObject('token',data);
+                },
+                enumerable:true,
+                configurable: true,
+                writable: true
+            },
+            getToken:{
+                value : function () {
+                    return $localStorage.getObject('token');
+                },
+                enumerable:true,
+                configurable: true,
+                writable: true
+            },
+            removeToken:{
+                value : function () {
+                    $localStorage.setObject('token',null);
+                },
+                enumerable:true,
+                configurable: true,
+                writable: true
+            }
+        });
+        return $delegate;
+    }]);
      //    .state('home.a',{
      //      url:'/a',
      //      templateUrl:'/templates/home-a.html'
