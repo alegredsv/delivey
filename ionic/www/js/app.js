@@ -6,10 +6,11 @@
 
 angular.module('starter.controllers',[]);
 angular.module('starter.services',[]);
-angular.module('starter', ['ionic','starter.controllers','starter.services','angular-oauth2','ngResource'])
+angular.module('starter', ['ionic','starter.controllers','starter.services','angular-oauth2','ngResource','ngCordova'])
     .constant('appConfig',{
       //  baseUrl:'http://delivery.app'
-        baseUrl:'http://192.168.10.10'
+       // baseUrl:'http://192.168.10.10',
+        baseUrl:'http://192.168.1.6:8000'
 
      //   baseUrl:'http://homestead.app:8000'
 
