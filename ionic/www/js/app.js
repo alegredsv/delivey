@@ -11,8 +11,8 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
       // casa baseUrl:'http://delivery.app'
        // casa baseUrl:'http://192.168.10.10',
        // casa baseUrl:'http://192.168.1.6:8000'
-         baseUrl:'http://54.244.77.187/delivey' //amazon
-     // serviço  baseUrl:'http://homestead.app:8000'
+      //   baseUrl:'http://54.244.77.187/delivey' //amazon
+     baseUrl:'http://homestead.app:8000' // servi   ço
 
     })
 .run(function($ionicPlatform) {
@@ -36,8 +36,8 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
    
     OAuthProvider.configure({
         baseUrl: appConfig.baseUrl,
-        clientId: 'appid02',
-       //clientId: 'apiid01',
+        //clientId: 'appid02',
+       clientId: 'apiid01',
         clientSecret: 'secret', // optional
         grantPath: '/oauth/access_token'
     });
@@ -49,6 +49,13 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
     });
 
   $stateProvider
+      .state('menu',{
+          url:'/menu',
+          templateUrl:'templates/menu.html',
+          controller:function ($scope) {
+              
+          }
+      })
          .state('login',{
          url:'/login',
          templateUrl:'templates/login.html',
