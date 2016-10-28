@@ -53,7 +53,10 @@ angular.module('starter.controllers')
                 $cordovaBarcodeScanner
                     .scan()
                     .then(function(barcodeData) {
-                        getValueCupom(barcodeData.text);
+                        if(typeof barcodeData.text != undefined) {
+                            getValueCupom(9878);
+                        }
+
                     }, function(error) {
                         $ionicPopup.alert({
                             title:'Advertência',
