@@ -13,7 +13,7 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
        // baseUrl:'http://192.168.1.6:8000'
        //  baseUrl:'http://54.244.77.187/delivey' //amazon
      //baseUrl:'http://homestead.app:8000' // servi   ço
-       baseUrl:' http://54.186.133.157/delivey/public' //amazon2
+      baseUrl:' http://54.186.133.157/delivey/public' //amazon2
 
 
     })
@@ -51,14 +51,7 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
     });
 
   $stateProvider
-      .state('menu',{
-          url:'/menu',
-          templateUrl:'templates/menu.html',
-          controller:function ($scope) {
-              
-          }
-      })
-         .state('login',{
+      .state('login',{
          url:'/login',
          templateUrl:'templates/login.html',
           controller:'LoginCtlr'
@@ -71,7 +64,8 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
       .state('client',{
           abstract:true,
           url:'/client',
-          template:'<ion-nav-view/>',
+          templateUrl:'templates/client/menu.html',
+          controller: 'ClientMenuCtlr'
       })
       //area de pedidos
       .state('client.checkout',{
@@ -79,6 +73,13 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
             templateUrl:'templates/client/checkout.html',
              controller:'ClientCheckoutCtlr',
              cache: false
+        })
+
+      .state('client.order',{
+          url: '/order',
+          templateUrl:'templates/client/order.html',
+          controller:'ClientOrderCtlr',
+          cache: false
         })
         //detalhes dos itens
       .state('client.checkout_item_detail',{

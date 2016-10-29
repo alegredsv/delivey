@@ -2,6 +2,7 @@
 
 namespace CodeDelivery\Transformers;
 
+use Illuminate\Database\Eloquent\Collection;
 use League\Fractal\TransformerAbstract;
 use CodeDelivery\Models\Order;
 
@@ -22,9 +23,11 @@ class OrderTransformer extends TransformerAbstract
      */
     public function transform(Order $model)
     {
+        
         return [
             'id'         => (int) $model->id,
             'total'      =>  $model->total,
+            'product_names'      =>  $this->getArrayProducyNames($model->item),
 
 
             /* place your other model properties here */
@@ -33,7 +36,13 @@ class OrderTransformer extends TransformerAbstract
             'updated_at' => $model->updated_at
         ];
     }
-
+    protected function getArrayProducyNames(Collection $items){
+        $names= [];
+        foreach ($items as $item){
+            $names[] = $item->product->name;
+        }
+        return $names;
+    }
     public function includeCupom(Order $model){
 
         if(!$model->cupom){
