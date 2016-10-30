@@ -8,12 +8,31 @@ angular.module('starter.controllers')
 
         $ionicLoading.show({
             template: 'Carregando...'
-        })
-        Order.query({id:null},function (data) {
-            $scope.items = data.data;
-            $ionicLoading.hide();
-        },function (errorData) {
-            $ionicLoading.hide();
-        })
+        });
+        $scope.doRefresh = function () {
+            getOrders().then(function (data) {
+                $scope.items = data.data;
+               $scope.$broadcast('scroll.refreshComplete');
+            },function (errorData) {
+                $scope.$broadcast('scroll.refreshComplete');
+            });
+        };
+        function getOrders() {
+            return Order.query(
+                {id:null,
+                    orderBy: 'created_at',
+                    sortedBy: 'desc'
 
+                }).$promise;
+        };
+            getOrders().then(function (data) {
+                $scope.items = data.data;
+                $ionicLoading.hide();
+            },function (errorData) {
+                $ionicLoading.hide();
+            });
+
+        $scope.orderDetail = function (order) {
+            $state.go('client.view_order',{id:order.id});
+        }
     }]);

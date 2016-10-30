@@ -6,14 +6,15 @@
 
 angular.module('starter.controllers',[]);
 angular.module('starter.services',[]);
-angular.module('starter', ['ionic','starter.controllers','starter.services','angular-oauth2','ngResource','ngCordova'])
+angular.module('starter.filters',[]);
+angular.module('starter', ['ionic','starter.controllers','starter.services','starter.filters','angular-oauth2','ngResource','ngCordova'])
     .constant('appConfig',{
-       //baseUrl:'http://delivery.app'
+       baseUrl:'http://delivery.app'
        //  baseUrl:'http://192.168.10.10', //casa
        // baseUrl:'http://192.168.1.6:8000'
        //  baseUrl:'http://54.244.77.187/delivey' //amazon
      //baseUrl:'http://homestead.app:8000' // servi   ço
-      baseUrl:' http://54.186.133.157/delivey/public' //amazon2
+     // baseUrl:' http://54.186.133.157/delivey/public' //amazon2
 
 
     })
@@ -81,6 +82,11 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
           controller:'ClientOrderCtlr',
           cache: false
         })
+      .state('client.view_order',{
+          url: '/view_order/:id',
+          templateUrl:'templates/client/view-order.html',
+          controller:'ClientViewOrderCtlr'
+      })
         //detalhes dos itens
       .state('client.checkout_item_detail',{
           url: '/checkout/detail/:index',
