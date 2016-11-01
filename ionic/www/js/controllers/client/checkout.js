@@ -3,7 +3,7 @@
  */
 angular.module('starter.controllers')
     .controller('ClientCheckoutCtlr',
-        ['$scope','$state','$cart', 'Order', '$ionicLoading','$ionicPopup','Cupom','$cordovaBarcodeScanner', function ($scope, $state, $cart, Order, $ionicLoading, $ionicPopup, Cupom, $cordovaBarcodeScanner) {
+        ['$scope','$state','$cart', 'ClientOrder', '$ionicLoading','$ionicPopup','Cupom','$cordovaBarcodeScanner', function ($scope, $state, $cart, Order, $ionicLoading, $ionicPopup, Cupom, $cordovaBarcodeScanner) {
 
 
             var cart = $cart.get();

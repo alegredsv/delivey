@@ -17,7 +17,12 @@ angular.module('starter.controllers')
                 return User.authenticated({include:'client'}).$promise;
             }).then(function (data) {
                 UserData.set(data.data);
-                $state.go('client.checkout');
+
+                if(data.data.role == 'client') {
+                    $state.go('client.checkout');
+                }else if(data.data.role=='deliveryman'){
+                    $state.go('deliveryman.order');
+                }
             } , function (responseError) {
                 UserData.set(null);
                 OAuthToken.removeToken();

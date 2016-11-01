@@ -2,7 +2,7 @@
  * Created by joeramone on 17/10/2016.
  */
 angular.module('starter.controllers')
-    .controller('ClientViewOrderCtlr', ['$scope','$stateParams','Order','$ionicLoading',
+    .controller('ClientViewOrderCtlr', ['$scope','$stateParams','ClientOrder','$ionicLoading',
         function ($scope, $stateParams, Order, $ionicLoading) {
 
         $scope.order = [];

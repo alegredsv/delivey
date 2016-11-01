@@ -7,6 +7,5 @@ angular.module('starter.controllers')
             $scope.user = {
                 name:''
             };
-            console.log( UserData.get());
-           $scope.user = UserData.get();
+            $scope.user = UserData.get();
     }]);

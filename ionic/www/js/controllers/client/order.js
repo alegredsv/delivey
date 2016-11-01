@@ -2,7 +2,7 @@
  * Created by joeramone on 17/10/2016.
  */
 angular.module('starter.controllers')
-        .controller('ClientOrderCtlr', ['$scope','$state','Order','$ionicLoading',
+        .controller('ClientOrderCtlr', ['$scope','$state','ClientOrder','$ionicLoading',
         function ($scope, $state, Order, $ionicLoading) {
             $scope.items = [];
 

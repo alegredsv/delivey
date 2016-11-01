@@ -2,8 +2,8 @@
  * Created by joeramone on 17/10/2016.
  */
 angular.module('starter.controllers')
-        .controller('DeliverymanOrderCtlr', ['$scope','$state','Order','$ionicLoading',
-        function ($scope, $state, Order, $ionicLoading) {
+        .controller('DeliverymanOrderCtlr', ['$scope','$state','DeliverymanOrder','$ionicLoading',
+        function ($scope, $state, DeliverymanOrder, $ionicLoading) {
             $scope.items = [];
 
         $ionicLoading.show({
@@ -18,7 +18,7 @@ angular.module('starter.controllers')
             });
         };
         function getOrders() {
-            return Order.query(
+            return DeliverymanOrder.query(
                 {id:null,
                     orderBy: 'created_at',
                     sortedBy: 'desc'
@@ -33,6 +33,6 @@ angular.module('starter.controllers')
             });
 
         $scope.orderDetail = function (order) {
-            $state.go('client.view_order',{id:order.id});
+            $state.go('deliveryman.view_order',{id:order.id});
         }
     }]);
