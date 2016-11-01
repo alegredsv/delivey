@@ -9,11 +9,11 @@ angular.module('starter.services',[]);
 angular.module('starter.filters',[]);
 angular.module('starter', ['ionic','starter.controllers','starter.services','starter.filters','angular-oauth2','ngResource','ngCordova'])
     .constant('appConfig',{
-       //baseUrl:'http://delivery.app'
+       baseUrl:'http://delivery.app'
        //  baseUrl:'http://192.168.10.10', //casa
        // baseUrl:'http://192.168.1.6:8000'
        //  baseUrl:'http://54.244.77.187/delivey' //amazon
-     baseUrl:'http://homestead.app:8000' // servi   ço
+     //baseUrl:'http://homestead.app:8000' // servi   ço
      // baseUrl:' http://54.186.133.157/delivey/public' //amazon2
 
 
@@ -39,8 +39,8 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','sta
    
     OAuthProvider.configure({
         baseUrl: appConfig.baseUrl,
-      // clientId: 'appid02',
-       clientId: 'apiid01',
+       clientId: 'appid02',
+       //clientId: 'apiid01',
         clientSecret: 'secret', // optional
         grantPath: '/oauth/access_token'
     });
@@ -66,7 +66,8 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','sta
           abstract:true,
           url:'/client',
           templateUrl:'templates/client/menu.html',
-          controller: 'ClientMenuCtlr'
+          controller: 'ClientMenuCtlr',
+          cache: false
       })
       //area de pedidos
       .state('client.checkout',{
@@ -110,7 +111,8 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','sta
           abstract:true,
           url:'/deliveryman',
           templateUrl:'templates/deliveryman/menu.html',
-          controller: 'DeliverymanMenuCtlr'
+          controller: 'DeliverymanMenuCtlr',
+          cache: false
       })
       .state('deliveryman.order',{
           url:'/order',
