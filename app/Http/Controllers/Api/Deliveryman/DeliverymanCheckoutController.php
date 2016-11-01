@@ -3,6 +3,7 @@
 namespace CodeDelivery\Http\Controllers\Api\Deliveryman;
 
 use CodeDelivery\Http\Controllers\Controller;
+use CodeDelivery\Models\Geo;
 use CodeDelivery\Repositories\OrderRepository;
 use CodeDelivery\Repositories\ProductRepository;
 use CodeDelivery\Repositories\UserRepository;
@@ -56,5 +57,13 @@ class DeliverymanCheckoutController extends Controller
         }
             return abort(400,'Order não encontrado');
 
+    }
+
+    public function geo(Request $request, Geo $geo, $id){
+        $idDeliveryman = Authorizer::getResourceOwnerId();
+        $order = $this->repository->getByIdAndDeliveryman($id, $idDeliveryman);
+        $geo->lat = $request->get('lat');
+        $geo->long = $request->get('long');
+        return $geo;
     }
 }
