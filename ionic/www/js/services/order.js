@@ -17,7 +17,7 @@ angular.module('starter.services')
         },
         updateStatus:{
             method:'PATCH',
-            url : appConfig.baseUrl+'/api/deliveryman/order/update-status'
+            url : appConfig.baseUrl+'/api/deliveryman/order/update-status/:id'
         },
         geo:{
             method:'POST',

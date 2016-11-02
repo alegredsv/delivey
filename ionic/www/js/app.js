@@ -7,9 +7,11 @@
 angular.module('starter.controllers',[]);
 angular.module('starter.services',[]);
 angular.module('starter.filters',[]);
-angular.module('starter', ['ionic','starter.controllers','starter.services','starter.filters','angular-oauth2','ngResource','ngCordova'])
+angular.module('starter', ['ionic','starter.controllers','starter.services','starter.filters',
+    'angular-oauth2','ngResource','ngCordova','uiGmapgoogle-maps','pusher-angular'])
     .constant('appConfig',{
-       baseUrl:'http://delivery.app'
+       baseUrl:'http://delivery.app',
+       pusherKey:'dc73ef9a8492e9c78a13'
        //  baseUrl:'http://192.168.10.10', //casa
        // baseUrl:'http://192.168.1.6:8000'
        //  baseUrl:'http://54.244.77.187/delivey' //amazon
@@ -18,7 +20,9 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','sta
 
 
     })
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $window, appConfig) {
+    $window.client = new Pusher(appConfig.pusherKey);
+
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -87,6 +91,12 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','sta
           url: '/view_order/:id',
           templateUrl:'templates/client/view-order.html',
           controller:'ClientViewOrderCtlr'
+      })
+      .state('client.view_delivery',{
+          url: '/view_delivery/:id',
+          templateUrl:'templates/client/view-delivery.html',
+          controller:'ClientViewDeliveryCtlr',
+          cache: false
       })
         //detalhes dos itens
       .state('client.checkout_item_detail',{

@@ -2,8 +2,8 @@
  * Created by joeramone on 17/10/2016.
  */
 angular.module('starter.controllers')
-        .controller('ClientOrderCtlr', ['$scope','$state','ClientOrder','$ionicLoading',
-        function ($scope, $state, Order, $ionicLoading) {
+        .controller('ClientOrderCtlr', ['$scope','$state','ClientOrder','$ionicLoading','$ionicActionSheet',
+        function ($scope, $state, Order, $ionicLoading,$ionicActionSheet) {
             $scope.items = [];
 
         $ionicLoading.show({
@@ -34,5 +34,35 @@ angular.module('starter.controllers')
 
         $scope.orderDetail = function (order) {
             $state.go('client.view_order',{id:order.id});
+        };
+
+        $scope.showActionSheet = function (order) {
+            $ionicActionSheet.show({
+                buttons:[
+                    {text:'Ver detalhes'},
+                    {text:'Ver entrega'}
+                ],
+                titleText:'O que fazer?',
+                canceltext:'Cancelar',
+                cancel:function () {
+
+                },
+                buttonClicked:function (index) {
+                    switch (index)
+                    {
+                        case 0:
+                        {
+                            $state.go('client.view_order',{id:order.id});
+                            break;
+                        }
+                        case 1:
+                        {
+                            $state.go('client.view_delivery',{id:order.id});
+                            break;
+                        }
+                    }
+                }
+
+            });
         }
     }]);
