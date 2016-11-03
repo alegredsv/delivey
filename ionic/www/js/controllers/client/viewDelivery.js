@@ -2,9 +2,9 @@
  * Created by joeramone on 17/10/2016.
  */
 angular.module('starter.controllers')
-    .controller('ClientViewDeliveryCtlr', ['$scope','$state','$ionicLoading','$cart',
+    .controller('ClientViewDeliveryCtlr', ['$scope','$state','$ionicLoading',
         'ClientOrder','$stateParams','$ionicPopup','UserData','$pusher','$window',
-        function ($scope, $state, $ionicLoading, $cart,Order,$stateParams,$ionicPopup,UserData,$pusher,$window) {
+        function ($scope, $state, $ionicLoading,Order,$stateParams,$ionicPopup,UserData,$pusher,$window) {
 var iconUrl = 'http://maps.google.com/mapfiles/kml/pal2/';
             $scope.map = {
                 center: {
@@ -24,7 +24,7 @@ var iconUrl = 'http://maps.google.com/mapfiles/kml/pal2/';
                 $scope.order = data.data;
                 $ionicLoading.hide();
                 if(data.data.status == 1){
-                    initMarkers();
+                    initMarkers(data.data);
                 }else{
                     $ionicPopup.alert({
                         title:'Advertência',

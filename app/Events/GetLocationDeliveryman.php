@@ -14,10 +14,12 @@ class GetLocationDeliveryman extends Event implements ShouldBroadcast
 
     public $geo;
     private $model;
+
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param Geo $geo
+     * @param Order $order
      */
     public function __construct(Geo $geo, Order $order)
     {

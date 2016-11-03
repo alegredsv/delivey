@@ -28,6 +28,8 @@ class OrderTransformer extends TransformerAbstract
             'id'         => (int) $model->id,
             'total'      =>  $model->total,
             'product_names'      =>  $this->getArrayProducyNames($model->item),
+            'hash'      =>  $model->hash,
+
             'status'      =>  $model->status,
 
 
