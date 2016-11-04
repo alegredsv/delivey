@@ -8,8 +8,8 @@ angular.module('starter.controllers')
 var iconUrl = 'http://maps.google.com/mapfiles/kml/pal2/';
             $scope.map = {
                 center: {
-                    latitude: -30.0333,
-                    longitude:  -51.2000
+                    latitude: 0,
+                    longitude: 0
                 },
                 zoom: 15};
 
@@ -34,6 +34,12 @@ var iconUrl = 'http://maps.google.com/mapfiles/kml/pal2/';
             }, function (errorData) {
                 $ionicLoading.hide();
             });
+            
+            $scope.$watch('markers.length', function (value) {
+                if(value == 2){
+                    createBounds();
+                }
+            })
 
             function initMarkers(order) {
                 var client = UserData.get().client.data;
@@ -76,9 +82,49 @@ var iconUrl = 'http://maps.google.com/mapfiles/kml/pal2/';
                 var pusher = $pusher($window.client);
                 channel = pusher.subscribe(channel);
                 channel.bind('CodeDelivery\\Events\\GetLocationDeliveryman',function (data) {
-                    console.log(data);
+                    var lat = data.geo.lat,long = data.geo.long;
+                    if($scope.markers.length <= 1){
+                        $scope.markers.push({
+                            id:'deliveryman',
+                            coords:{
+                                latitude:lat,
+                                longitude:long
+                            },
+                            options:{
+                                title:"Entregador",
+                                icon:iconUrl+'icon47.png'
+                            }
+                        });
+                        return;
+                    }
+                    for(var key in $scope.markers){
+                        if($scope.markers[key].id == 'deliveryman'){
+                            $scope.markers[key].coords = {
+                                latitude:lat,
+                                longitude:long
+                            }
+                        }
+                    }
                 });
             }
 
+            function createBounds() {
+                var bounds = new google.maps.LatLngBounds();
+                var latlng;
+                angular.forEach($scope.markers, function (value) {
+                    latlng = new google.maps.LatLng(Number(value.coords.latitude),Number(value.coords.longitude));
+                    bounds.extend(latlng);
+                });
+                $scope.map.bounds = {
+                    northeast:{
+                        latitude: bounds.getNorthEast().lat(),
+                        longitude: bounds.getNorthEast().lng()
+                    },
+                    southwest:{
+                        latitude: bounds.getSouthWest().lat(),
+                        longitude: bounds.getSouthWest().lng()
+                    }
+                };
+            }
 
     }]);
