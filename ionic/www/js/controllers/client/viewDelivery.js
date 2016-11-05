@@ -3,15 +3,10 @@
  */
 angular.module('starter.controllers')
     .controller('ClientViewDeliveryCtlr', ['$scope','$state','$ionicLoading',
-        'ClientOrder','$stateParams','$ionicPopup','UserData','$pusher','$window',
-        function ($scope, $state, $ionicLoading,Order,$stateParams,$ionicPopup,UserData,$pusher,$window) {
+        'ClientOrder','$stateParams','$ionicPopup','UserData','$pusher','$window','$map','uiGmapGoogleMapApi',
+        function ($scope, $state, $ionicLoading,Order,$stateParams,$ionicPopup,UserData,$pusher,$window,$map,uiGmapGoogleMapApi) {
 var iconUrl = 'http://maps.google.com/mapfiles/kml/pal2/';
-            $scope.map = {
-                center: {
-                    latitude: 0,
-                    longitude: 0
-                },
-                zoom: 15};
+            $scope.map = $map;
 
             $scope.markers = [];
 
@@ -19,10 +14,14 @@ var iconUrl = 'http://maps.google.com/mapfiles/kml/pal2/';
             $ionicLoading.show({
                 template: 'Carregando...'
             });
-
+            uiGmapGoogleMapApi.then(function (maps) {
+                $ionicLoading.hide();
+            },function (error) {
+                $ionicLoading.hide();
+            })   
             Order.get({id:$stateParams.id, include:"itens,cupom"},function (data) {
                 $scope.order = data.data;
-                $ionicLoading.hide();
+
                 if(data.data.status == 1){
                     initMarkers(data.data);
                 }else{
@@ -31,8 +30,6 @@ var iconUrl = 'http://maps.google.com/mapfiles/kml/pal2/';
                         template:'Pedido ainda não esta sendo entregue!'
                     })
                 }
-            }, function (errorData) {
-                $ionicLoading.hide();
             });
             
             $scope.$watch('markers.length', function (value) {
@@ -127,4 +124,18 @@ var iconUrl = 'http://maps.google.com/mapfiles/kml/pal2/';
                 };
             }
 
-    }]);
+    }])
+
+.controller('CvdControlDescentralize',['$scope','$map',function ($scope,$map) {
+    $scope.map = $map;
+    $scope.fit = function() {
+       $scope.map.fit = !$scope.map.fit;
+    }
+    
+}]).controller('CvdControlReload',['$scope','$window','$timeout',function ($scope,$window,$timeout) {
+    $scope.reload=function () {
+        $timeout(function(){
+            $window.location.reload(true);
+        },100);
+    }
+}]);

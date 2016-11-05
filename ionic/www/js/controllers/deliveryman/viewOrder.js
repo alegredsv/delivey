@@ -10,7 +10,7 @@ angular.module('starter.controllers')
         $ionicLoading.show({
             template: 'Carregando...'
         });
-
+            var lat = null,long;
         DeliverymanOrder.get({id:$stateParams.id, include:"itens,cupom"},function (data) {
             $scope.order = data.data;
             $ionicLoading.hide();
@@ -36,9 +36,17 @@ angular.module('starter.controllers')
                     watch.then(null,function (responseError) {
 
                     },function (position) {
+                        if(!lat){
+                      lat = position.coords.latitude;
+                        long = position.coords.longitude;
+                        }else{
+                            long -= 0.944;
+                        }
                        DeliverymanOrder.geo({id:$stateParams.id},{
-                           lat:position.coords.latitude,
-                           long:position.coords.longitude
+                           // lat:position.coords.latitude,
+                           // long:position.coords.longitude
+                            lat:lat,
+                            long:long
                        })
                     });
                });

@@ -24,13 +24,26 @@
         </ion-list>
 
         <ui-gmap-google-map draggable="true"  center="map.center"  zoom="map.zoom" bounds="map.bounds">
-            <ui-gmap-marker idkey="o.id" coords="o.coords" options="o.options" ng-repeat="o in markers">
+            <ui-gmap-map-control template="button-descentralize.html" position="top-right"
+                                 index="-1" controller="CvdControlDescentralize" ></ui-gmap-map-control>
+            <ui-gmap-map-control template="button-reload.html" position="top-right"
+                                 index="-1" controller="CvdControlReload" ></ui-gmap-map-control>
+            <ui-gmap-markers  coords="'coords'" options="'options'" fit="'true'" models="markers">
 
-            </ui-gmap-marker>
+            </ui-gmap-markers>
         </ui-gmap-google-map>
     </ion-content>
 </ion-view>
-
+<script type="text/ng-template" id="button-descentralize.html">
+<button class="button button-stable" ng-click="fit()">
+    <i class="ion" ng-class="{'ion-android-bicycle':!map.fit, 'ion-stop':map.fit}"></i>
+</button>
+</script>
+<script type="text/ng-template" id="button-reload.html">
+    <button class="button button-stable" ng-click="reload()">
+        <i class="ion ion-refresh"></i>
+    </button>
+</script>
 <style type="text/css">
     .angular-google-map-container{
         height: 400px;
