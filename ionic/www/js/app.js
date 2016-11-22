@@ -7,19 +7,36 @@
 angular.module('starter.controllers',[]);
 angular.module('starter.services',[]);
 angular.module('starter.filters',[]);
-angular.module('starter', ['ionic','starter.controllers','starter.services','starter.filters',
+angular.module('starter', ['ionic','ionic.service.core','starter.controllers','starter.services','starter.filters',
     'angular-oauth2','ngResource','ngCordova','uiGmapgoogle-maps','pusher-angular'])
     .constant('appConfig',{
-       baseUrl:'http://delivery.app',
+   //    baseUrl:'http://delivery.app',
        pusherKey:'dc73ef9a8492e9c78a13',
        //  baseUrl:'http://192.168.10.10', //casa
        // baseUrl:'http://192.168.1.6:8000'
        //  baseUrl:'http://54.244.77.187/delivey' //amazon
-   // baseUrl:'http://homestead.app:8000' // servi   ço
+    baseUrl:'http://homestead.app:8000' // servi   ço
      // baseUrl:' http://54.186.133.157/delivey/public' //amazon2
 
 
     })
+    .constant('CloudSettings', {
+    'core': {
+        'app_id': '6ad56d8a',
+    },
+    'push': {
+        'sender_id': '1092369893707',
+        'pluginConfig': {
+            'ios': {
+                'badge': true,
+                'sound': true
+            },
+            'android': {
+                'iconColor': '#343434'
+            }
+        }
+    }
+})
 .run(function($ionicPlatform, $window, appConfig) {
     $window.client = new Pusher(appConfig.pusherKey);
 
@@ -37,6 +54,23 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','sta
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+      Ionic.io();
+      var push = new Ionic.Push({
+          debug: true,
+          onNotification: function (message) {
+              alert(message.text);
+          },
+          pluginConfig: {
+                            "android": {
+                  "iconColor": "#343434"
+              }
+          }
+      });
+      push.register(function (token) {
+          
+      });
+
+
   });
 })
 .config(function ($stateProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider,appConfig, $provide) {

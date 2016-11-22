@@ -15,7 +15,7 @@ return [
     'allowedOrigins' => ['*'],
     'allowedHeaders' => ['*'],
     'allowedMethods' => ['*'],
-    'Access-Control-Allow-Origin'  => ['*'],
+    'Access-Control-Allow-Origin' => ['*'],
     'exposedHeaders' => [],
     'maxAge' => 0,
     'hosts' => [],

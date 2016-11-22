@@ -36,7 +36,7 @@ If you're using PusherJS on a web page, you can install the library via:
 #### CDN
 
 ```html
-<script src="//js.pusher.com/3.1/pusher.min.js"></script>
+<script src="//js.pusher.com/3.2/pusher.min.js"></script>
 ```
 
 #### Bower
@@ -83,7 +83,7 @@ Notes:
 You can import the worker script (`pusher.worker.js`, not `pusher.js`) from the CDN:
 
 ```javascript
-importScripts("https://js.pusher.com/3.1/pusher.worker.min.js");
+importScripts("https://js.pusher.com/3.2/pusher.worker.min.js");
 ```
 
 ### NodeJS
@@ -167,7 +167,7 @@ var pusher = new Pusher(API_KEY, { cluster: "eu" });
 
 #### `disableStats` (Boolean)
 
-Disables stats collection, so that connection metrics are not submitted to Pusher’s servers.
+Disables stats collection, so that connection metrics are not submitted to Pusher’s servers. These stats are used for internal monitoring only and they do not affect the account stats.
 
 #### `enabledTransports` (Array)
 
@@ -386,8 +386,21 @@ Currently, pusher-js itself does not support authenticating multiple channels in
 
 There are a number of events which are used internally, but can also be of use elsewhere:
 
-* connection_established
 * subscribe
+
+## Connection Events
+
+To listen for when you connect to Pusher:
+
+```js
+pusher.connection.bind('connected', callback);
+```
+
+And to bind to disconnections:
+
+```js
+pusher.connection.bind('disconnected', callback);
+```
 
 ## Self-serving JS files
 
@@ -399,17 +412,17 @@ First, clone this repository and run `npm install && git submodule init && git s
 
 In the `dist/web` folder, you should see the files you need: `pusher.js`, `pusher.min.js`, `json2.js`, `json.min.js`, `sockjs.js` and `sockjs.min.js`. `pusher.js` should be built referencing your URLs as the dependency hosts.
 
-First, make sure you expose all files from the `dist` directory. They need to be in a directory with named after the version number. For example, if you're hosting version 3.1.0 under `http://example.com/pusher-js` (and https for SSL), files should be accessible under following URL's:
+First, make sure you expose all files from the `dist` directory. They need to be in a directory with named after the version number. For example, if you're hosting version 3.2.0 under `http://example.com/pusher-js` (and https for SSL), files should be accessible under following URL's:
 
-    http://example.com/pusher-js/3.1.0/pusher.js
-    http://example.com/pusher-js/3.1.0/json2.js
-    http://example.com/pusher-js/3.1.0/sockjs.js
+    http://example.com/pusher-js/3.2.0/pusher.js
+    http://example.com/pusher-js/3.2.0/json2.js
+    http://example.com/pusher-js/3.2.0/sockjs.js
 
 Minified files should have `.min` in their names, as in the `dist/web` directory:
 
-    http://example.com/pusher-js/2.1.3/pusher.min.js
-    http://example.com/pusher-js/2.1.3/json2.min.js
-    http://example.com/pusher-js/2.1.3/sockjs.min.js
+    http://example.com/pusher-js/3.2.0/pusher.min.js
+    http://example.com/pusher-js/3.2.0/json2.min.js
+    http://example.com/pusher-js/3.2.0/sockjs.min.js
 
 ## SockJS compatibility
 
