@@ -6,6 +6,7 @@ use CodeDelivery\Http\Controllers\Controller;
 use CodeDelivery\Repositories\CupomRepository;
 use CodeDelivery\Http\Requests;
 use CodeDelivery\Repositories\UserRepository;
+use Illuminate\Http\Request;
 use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class UserController extends Controller
@@ -23,5 +24,10 @@ class UserController extends Controller
         return $this->repository->skipPresenter(false)->find($id);
     }
 
+    public function updateDeviceToken(Request $request){
+        $id = Authorizer::getResourceOwnerId();
+        $deviceToken = $request->get('device_token');
+        return $this->repository->updateDeviceToken($id,$deviceToken);
+    }
 
 }

@@ -26,12 +26,12 @@
     "!CHANGELOG.markdown"
   ],
   "homepage": "https://github.com/pusher/pusher-js",
-  "version": "3.2.2",
-  "_release": "3.2.2",
+  "version": "3.2.3",
+  "_release": "3.2.3",
   "_resolution": {
     "type": "version",
-    "tag": "v3.2.2",
-    "commit": "14401c3368e3ff07c39a3dbb0c0020623b96020d"
+    "tag": "v3.2.3",
+    "commit": "918b63ca00d80ec0c18806fb1c8fca2bf88de4f4"
   },
   "_source": "https://github.com/pusher/pusher-js.git",
   "_target": "^3.2.1",

@@ -2,8 +2,8 @@
  * Created by joeramone on 12/10/2016.
  */
 angular.module('starter.controllers')
-    .controller('LoginCtlr', ['$scope','OAuth','OAuthToken','$ionicPopup','$state','$q','User','UserData',
-        function ($scope, OAuth,OAuthToken, $ionicPopup, $state,$q, User,UserData) {
+    .controller('LoginCtlr', ['$scope','OAuth','OAuthToken','$ionicPopup','$state','$q','User','UserData','$localStorage',
+        function ($scope, OAuth,OAuthToken, $ionicPopup, $state,$q, User,UserData,$localStorage) {
         $scope.user = {
             username:'',
             password:''
@@ -13,7 +13,14 @@ angular.module('starter.controllers')
         
           $scope.login = function () {
            var promise =  OAuth.getAccessToken($scope.user);
-            promise.then(function(data){
+            promise
+                .then(function(data){
+                    var token = $localStorage.get('device_token');
+                    return User.updateDeviceToken({},{device_token:token}).$promise;
+                })
+
+
+                .then(function(data){
                 return User.authenticated({include:'client'}).$promise;
             }).then(function (data) {
                 UserData.set(data.data);
