@@ -2,15 +2,27 @@
  * Created by joeramone on 12/10/2016.
  */
 angular.module('starter.controllers')
-    .controller('LoginCtlr', ['$scope','OAuth','OAuthToken','$ionicPopup','$state','$q','User','UserData','$localStorage',
-        function ($scope, OAuth,OAuthToken, $ionicPopup, $state,$q, User,UserData,$localStorage) {
+    .controller('LoginCtlr', ['$scope','OAuth','OAuthToken','$ionicPopup','$state','$q','User','UserData','$localStorage','$ionicPush','$rootScope',
+        function ($scope, OAuth,OAuthToken, $ionicPopup, $state,$q, User,UserData,$localStorage,$ionicPush,$rootScope) {
         $scope.user = {
             username:'',
             password:''
         }
             UserData.set(null);
             OAuthToken.removeToken();
-        
+            $ionicPush.register().then(function(t) {
+
+                return $ionicPush.saveToken(t);
+            }).then(function(t) {
+                console.log('Token saved:', t.token);
+                $localStorage.set('device_token',t.token);
+            });
+
+
+            $rootScope.$on('cloud:push:notification', function(event, data) {
+                var msg = data.message;
+                alert(msg.title + ': ' + msg.text);
+            });
           $scope.login = function () {
            var promise =  OAuth.getAccessToken($scope.user);
             promise

@@ -8,7 +8,6 @@
       Your Name Here
     </author>
     <content src="index.html" />
-
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
@@ -49,6 +48,6 @@
     <allow-navigation href="*" />
     <access origin="*" />
     <plugin name="phonegap-plugin-push" spec="~1.8.4">
-        <variable name="SENDER_ID" value="6ad56d8a" />
+        <variable name="SENDER_ID" value="1092369893707" />
     </plugin>
 </widget>
