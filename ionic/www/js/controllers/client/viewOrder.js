@@ -11,7 +11,6 @@ angular.module('starter.controllers')
         });
 
         Order.get({id:$stateParams.id, include:"itens,cupom"},function (data) {
-            console.log(data.data);
             $scope.order = data.data;
             $ionicLoading.hide();
         }, function (errorData) {

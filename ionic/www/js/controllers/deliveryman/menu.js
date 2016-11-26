@@ -8,4 +8,7 @@ angular.module('starter.controllers')
                 name:''
             };
             $scope.user = UserData.get();
+            $scope.logout = function () {
+                $state.go('logout');
+            }
     }]);

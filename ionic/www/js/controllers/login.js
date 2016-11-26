@@ -2,8 +2,8 @@
  * Created by joeramone on 12/10/2016.
  */
 angular.module('starter.controllers')
-    .controller('LoginCtlr', ['$scope','OAuth','OAuthToken','$ionicPopup','$state','$q','User','UserData','$localStorage','$ionicPush','$rootScope',
-        function ($scope, OAuth,OAuthToken, $ionicPopup, $state,$q, User,UserData,$localStorage,$ionicPush,$rootScope) {
+    .controller('LoginCtlr', ['$scope','OAuth','OAuthToken','$ionicPopup','$state','$q','User','UserData','$localStorage','$ionicPush','$rootScope','$redirect',
+        function ($scope, OAuth,OAuthToken, $ionicPopup, $state,$q, User,UserData,$localStorage,$ionicPush,$rootScope,$redirect) {
         $scope.user = {
             username:'',
             password:''
@@ -11,10 +11,8 @@ angular.module('starter.controllers')
             UserData.set(null);
             OAuthToken.removeToken();
             $ionicPush.register().then(function(t) {
-
                 return $ionicPush.saveToken(t);
             }).then(function(t) {
-                console.log('Token saved:', t.token);
                 $localStorage.set('device_token',t.token);
             });
 
@@ -37,11 +35,12 @@ angular.module('starter.controllers')
             }).then(function (data) {
                 UserData.set(data.data);
 
-                if(data.data.role == 'client') {
-                    $state.go('client.checkout');
-                }else if(data.data.role=='deliveryman'){
-                    $state.go('deliveryman.order');
-                }
+                // if(data.data.role == 'client') {
+                //     $state.go('client.checkout');
+                // }else if(data.data.role=='deliveryman'){
+                //     $state.go('deliveryman.order');
+                // }
+                $redirect.redirectAfterLogin();
             } , function (responseError) {
                 UserData.set(null);
                 OAuthToken.removeToken();

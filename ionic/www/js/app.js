@@ -10,13 +10,18 @@ angular.module('starter.filters',[]);
 angular.module('starter', ['ionic','ionic.cloud','starter.controllers','starter.services','starter.filters',
     'angular-oauth2','ngResource','ngCordova','uiGmapgoogle-maps','pusher-angular'])
     .constant('appConfig',{
-       baseUrl:'http://delivery.app',
+
+        redirectAfterLogin:{
+            client:'client.order',
+            deliveryman: 'deliveryman.order'
+        },
+      // baseUrl:'http://delivery.app',
        pusherKey:'dc73ef9a8492e9c78a13',
        //  baseUrl:'http://192.168.10.10', //casa
        // baseUrl:'http://192.168.1.6:8000'
        //  baseUrl:'http://54.244.77.187/delivey' //amazon
   //  baseUrl:'http://homestead.app:8000' // servi   ço
-     // baseUrl:' http://54.186.133.157/delivey/public' //amazon2
+      baseUrl:' http://54.186.133.157/delivey/public' //amazon2
 
 
     })
@@ -107,8 +112,13 @@ angular.module('starter', ['ionic','ionic.cloud','starter.controllers','starter.
       .state('login',{
          url:'/login',
          templateUrl:'templates/login.html',
-          controller:'LoginCtlr'
+          controller:'LoginCtlr',
+          cache: false
         })
+      .state('logout',{
+          url:'/logout',
+          controller:'LogoutCtlr'
+      })
       .state('home',{
       url:'/home',
       templateUrl:'templates/home.html',

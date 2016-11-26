@@ -20,7 +20,7 @@ angular.module('starter.controllers')
                     $scope.username =data.data.name;
                 })
                 .error(function (data, status, header, config) {
-                    console.log('erro');
+                   
 
                 });
 
