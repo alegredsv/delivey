@@ -7,21 +7,22 @@
 angular.module('starter.controllers',[]);
 angular.module('starter.services',[]);
 angular.module('starter.filters',[]);
-angular.module('starter', ['ionic','ionic.cloud','starter.controllers','starter.services','starter.filters',
-    'angular-oauth2','ngResource','ngCordova','uiGmapgoogle-maps','pusher-angular'])
+angular.module('starter.run',[]);
+angular.module('starter', ['ionic','ionic.cloud','starter.controllers','starter.services','starter.filters','starter.run',
+    'angular-oauth2','ngResource','ngCordova','uiGmapgoogle-maps','pusher-angular','permission','permission.ui'])
     .constant('appConfig',{
 
         redirectAfterLogin:{
             client:'client.order',
             deliveryman: 'deliveryman.order'
         },
-      // baseUrl:'http://delivery.app',
+       baseUrl:'http://delivery.app',
        pusherKey:'dc73ef9a8492e9c78a13',
        //  baseUrl:'http://192.168.10.10', //casa
        // baseUrl:'http://192.168.1.6:8000'
        //  baseUrl:'http://54.244.77.187/delivey' //amazon
   //  baseUrl:'http://homestead.app:8000' // servi   ço
-      baseUrl:' http://54.186.133.157/delivey/public' //amazon2
+     // baseUrl:' http://54.186.133.157/delivey/public' //amazon2
 
 
     })
@@ -129,7 +130,12 @@ angular.module('starter', ['ionic','ionic.cloud','starter.controllers','starter.
           url:'/client',
           templateUrl:'templates/client/menu.html',
           controller: 'ClientMenuCtlr',
-          cache: false
+          cache: false,
+          data:{
+              permissions:{
+                  only:['client-role']
+              }
+          }
       })
       //area de pedidos
       .state('client.checkout',{
@@ -180,7 +186,12 @@ angular.module('starter', ['ionic','ionic.cloud','starter.controllers','starter.
           url:'/deliveryman',
           templateUrl:'templates/deliveryman/menu.html',
           controller: 'DeliverymanMenuCtlr',
-          cache: false
+          cache: false,
+          data:{
+              permissions:{
+                  only:['deliveryman-role']
+              }
+          }
       })
       .state('deliveryman.order',{
           url:'/order',
@@ -194,7 +205,10 @@ angular.module('starter', ['ionic','ionic.cloud','starter.controllers','starter.
           cache: false
       })
     $urlRouterProvider.otherwise('/login');
-
+    // $urlRouterProvider.otherwise( function($injector) {
+    //     var $state = $injector.get("$state");
+    //     state.go('/login');
+    // });
 
     $provide.decorator('OAuthToken',['$localStorage','$delegate', function ($localStorage,$delegate) {
         Object.defineProperties($delegate,{
