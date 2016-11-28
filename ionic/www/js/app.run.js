@@ -28,13 +28,20 @@ angular.module('starter.run').run(['PermPermissionStore','OAuth','UserData','Per
      PermRoleStore.defineRole('deliveryman-role',['user-permission','deliveryman-permission']);
 
        $rootScope.$on('event:auth-loginRequired',function (event, data) {
-           OAuth.getRefreshToken().then(function (data) {
-               authService.loginConfirmed(data, function(config) {
-                   config.headers.Authorization = data.authorizationToken;
-                   return config;
-               });
-           },function (errorData) {
-               $state.go('logout');
-           })
+             if(!$rootScope.refreshingToken ){
+                 $rootScope.refreshingToken =  OAuth.getRefreshToken();
+             }
+                 $rootScope.refreshingToken.then(function (data) {
+                      //  authService.loginConfirmed();
+
+                    authService.loginConfirmed('success', function(config){
+                        $rootScope.refreshingToken = null;
+                            return false;
+                    })
+
+                }, function (errorData) {
+                    $state.go('logout');
+                })
+            
        });
 }]);
