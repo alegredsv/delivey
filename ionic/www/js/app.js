@@ -9,14 +9,14 @@ angular.module('starter.services',[]);
 angular.module('starter.filters',[]);
 angular.module('starter.run',[]);
 angular.module('starter', ['ionic','ionic.cloud','starter.controllers','starter.services','starter.filters','starter.run',
-    'angular-oauth2','ngResource','ngCordova','uiGmapgoogle-maps','pusher-angular','permission','permission.ui'])
+    'angular-oauth2','ngResource','ngCordova','uiGmapgoogle-maps','pusher-angular','permission','permission.ui','http-auth-interceptor'])
     .constant('appConfig',{
 
         redirectAfterLogin:{
             client:'client.order',
             deliveryman: 'deliveryman.order'
         },
-       baseUrl:'http://delivery.app',
+      baseUrl:'http://delivery.app',
        pusherKey:'dc73ef9a8492e9c78a13',
        //  baseUrl:'http://192.168.10.10', //casa
        // baseUrl:'http://192.168.1.6:8000'
@@ -118,7 +118,8 @@ angular.module('starter', ['ionic','ionic.cloud','starter.controllers','starter.
         })
       .state('logout',{
           url:'/logout',
-          controller:'LogoutCtlr'
+          controller:'LogoutCtlr',
+          cache: false
       })
       .state('home',{
       url:'/home',
@@ -214,7 +215,7 @@ angular.module('starter', ['ionic','ionic.cloud','starter.controllers','starter.
         Object.defineProperties($delegate,{
             setToken:{
                 value : function (data) {
-                   return $localStorage.setObject('token',data);
+                    return $localStorage.setObject('token',data);
                 },
                 enumerable:true,
                 configurable: true,
@@ -239,6 +240,12 @@ angular.module('starter', ['ionic','ionic.cloud','starter.controllers','starter.
         });
         return $delegate;
     }]);
+
+    $provide.decorator('oauthInterceptor',['$delegate', function ($delegate) {
+        delete $delegate['responseError'];
+        return $delegate;
+    }]);
+
      //    .state('home.a',{
      //      url:'/a',
      //      templateUrl:'/templates/home-a.html'

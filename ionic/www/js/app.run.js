@@ -2,7 +2,9 @@
  * Created by joeramone on 27/11/2016.
  */
 angular.module('starter.run').run(['PermPermissionStore','OAuth','UserData','PermRoleStore',
-    function (PermPermissionStore,OAuth,UserData,PermRoleStore) {
+    '$rootScope','authService','$state',
+    function (PermPermissionStore,OAuth,UserData,PermRoleStore,
+              $rootScope,authService,$state) {
     PermPermissionStore.definePermission('user-permission',function () {
         return OAuth.isAuthenticated();
     });
@@ -24,4 +26,15 @@ angular.module('starter.run').run(['PermPermissionStore','OAuth','UserData','Per
         return user.role  == 'deliveryman';
     });
      PermRoleStore.defineRole('deliveryman-role',['user-permission','deliveryman-permission']);
+
+       $rootScope.$on('event:auth-loginRequired',function (event, data) {
+           OAuth.getRefreshToken().then(function (data) {
+               authService.loginConfirmed(data, function(config) {
+                   config.headers.Authorization = data.authorizationToken;
+                   return config;
+               });
+           },function (errorData) {
+               $state.go('logout');
+           })
+       });
 }]);
