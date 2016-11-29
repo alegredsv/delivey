@@ -2,9 +2,9 @@
  * Created by joeramone on 27/11/2016.
  */
 angular.module('starter.run').run(['PermPermissionStore','OAuth','UserData','PermRoleStore',
-    '$rootScope','authService','$state',
+    '$rootScope','authService','$state','httpBuffer',
     function (PermPermissionStore,OAuth,UserData,PermRoleStore,
-              $rootScope,authService,$state) {
+              $rootScope,authService,$state,httpBuffer) {
     PermPermissionStore.definePermission('user-permission',function () {
         return OAuth.isAuthenticated();
     });
@@ -28,20 +28,30 @@ angular.module('starter.run').run(['PermPermissionStore','OAuth','UserData','Per
      PermRoleStore.defineRole('deliveryman-role',['user-permission','deliveryman-permission']);
 
        $rootScope.$on('event:auth-loginRequired',function (event, data) {
-             if(!$rootScope.refreshingToken ){
-                 $rootScope.refreshingToken =  OAuth.getRefreshToken();
-             }
-                 $rootScope.refreshingToken.then(function (data) {
-                      //  authService.loginConfirmed();
+           switch (data.data.error){
+               case 'access_denied':{
+                   if (!$rootScope.refreshingToken) {
+                       $rootScope.refreshingToken = OAuth.getRefreshToken();
+                   }
+                   $rootScope.refreshingToken.then(function (data) {
+                       //  authService.loginConfirmed();
+                       $rootScope.refreshingToken = null;
+                       authService.loginConfirmed('success', function (config) {
+                           config.headers["Authorization"] = data.data.token_type + " " + data.data.access_token;
+                           return config;
+                       })
 
-                    authService.loginConfirmed('success', function(config){
-                        $rootScope.refreshingToken = null;
-                            return false;
-                    })
-
-                }, function (errorData) {
-                    $state.go('logout');
-                })
-            
+                   }, function (errorData) {
+                       $state.go('logout');
+                   });
+                   break;
+               }
+               case 'invalid_credentials':{
+                   httpBuffer.rejectAll(data);
+                   break;
+               }
+               default:
+                   $state.go('logout');
+           }
        });
 }]);

@@ -16,12 +16,12 @@ angular.module('starter', ['ionic','ionic.cloud','starter.controllers','starter.
             client:'client.order',
             deliveryman: 'deliveryman.order'
         },
-      baseUrl:'http://delivery.app',
+//      baseUrl:'http://delivery.app',
        pusherKey:'dc73ef9a8492e9c78a13',
        //  baseUrl:'http://192.168.10.10', //casa
        // baseUrl:'http://192.168.1.6:8000'
        //  baseUrl:'http://54.244.77.187/delivey' //amazon
-  //  baseUrl:'http://homestead.app:8000' // servi   ço
+    baseUrl:'http://homestead.app:8000' // servi   ço
      // baseUrl:' http://54.186.133.157/delivey/public' //amazon2
 
 
@@ -97,8 +97,8 @@ angular.module('starter', ['ionic','ionic.cloud','starter.controllers','starter.
     });
     OAuthProvider.configure({
         baseUrl: appConfig.baseUrl,
-      clientId: 'appid02',
-      // clientId: 'apiid01',
+      //clientId: 'appid02',
+        clientId: 'apiid01',
         clientSecret: 'secret', // optional
         grantPath: '/oauth/access_token'
     });
